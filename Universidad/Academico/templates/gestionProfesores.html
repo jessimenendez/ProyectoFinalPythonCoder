@@ -1,0 +1,56 @@
+{% extends "./base.html" %}
+
+{%block title%} Gestión de Profesor {%endblock%}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            <h2>Gestión de profesores</h2>
+            <div class="card">
+            <div class="card-body">
+                <form action="/registrarProfesor/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtNombreProfesor" name="txtNombreProfesor" class="form-control" placeholder="Nombre"
+                             maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtApellidoProfesor" name="txtApellidoProfesor" class="form-control" placeholder="Apellido"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">                        
+                        <input type="email" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                      </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+            <h1>Listado de Profesores</h1>
+            <div class="table-responsive py-2">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>   
+                            <th>Email</th>                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in profesores %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{p.nombre}}</td>
+                            <td>{{p.apellido}}</td>
+                            <td>{{p.email}}</td>                          
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
